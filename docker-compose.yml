@@ -1,0 +1,18 @@
+services:
+  php7_4:
+    container_name: php7-4
+    hostname: php7-4
+    image: php:7.4-fpm-alpine3.13
+    volumes:
+      - ./php7_4:/var/www/html:rw
+
+  postgres12:
+    container_name: postgres12
+    hostname: postgres12
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ./postgres12/:/vol:rw
