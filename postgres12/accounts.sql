@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS accounts;
+CREATE TABLE accounts(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  balance DEC(15,2) NOT NULL
+);
