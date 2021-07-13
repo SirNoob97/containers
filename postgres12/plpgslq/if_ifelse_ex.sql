@@ -1,24 +1,24 @@
-do $$
-declare
-  v_film film%rowtype;
-  len_description varchar(100);
-begin
-  select * from film into v_film where film_id = 100;
+DO $$
+DECLARE
+  v_film film%ROWTYPE;
+  len_description VARCHAR(100);
+BEGIN
+  SELECT * FROM film INTO v_film WHERE film_id = 100;
 
-  if not found then
-    raise notice 'The film could not be found';
-  else
-    if v_film.length > 0 and v_film.length <= 50 then
+  IF NOT found THEN
+    RAISE NOTICE 'The film could not be found';
+  ELSE
+    IF v_film.length > 0 AND v_film.length <= 50 THEN
       len_description := 'Short';
-    elseif v_film.length > 50 and v_film.length < 120 then
+    ELSEIF v_film.length > 50 AND v_film.length < 120 THEN
       len_description := 'Medium';
-    elseif v_film.length > 120 then
+    ELSEIF v_film.length > 120 THEN
       len_description := 'Long';
-    else
+    ELSE
       len_description := 'N/A';
-    end if;
+    END IF;
 
-    raise notice 'The % film is %', v_film.title, len_description;
-  end if;
-end
-$$ language plpgsql;
+    RAISE NOTICE 'The % film is %', v_film.title, len_description;
+  END IF;
+END
+$$ LANGUAGE plpgsql;

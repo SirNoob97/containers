@@ -1,39 +1,39 @@
-do $$
-declare
-  rate film.rental_rate%type;
-  price_segment varchar(50);
-begin
-  select rental_rate into rate from film where film_id = 100;
+DO $$
+DECLARE
+  rate film.rental_rate%TYPE;
+  price_segment VARCHAR(50);
+BEGIN
+  SELECT rental_rate INTO rate FROM film WHERE film_id = 100;
 
-  if found then
-    case rate
-      when 0.99 then price_segment = 'Mass';
-      when 2.99 then price_segment = 'Mainstream';
-      when 4.99 then price_segment = 'High End';
-      else price_segment = 'Unspecified';
-    end case;
+  IF found THEN
+    CASE rate
+      WHEN 0.99 THEN price_segment = 'Mass';
+      WHEN 2.99 THEN price_segment = 'Mainstream';
+      WHEN 4.99 THEN price_segment = 'High End';
+      ELSE price_segment = 'Unspecified';
+    END CASE;
     raise notice '%', price_segment;
-  end if;
-end
-$$ language plpgsql;
+  END IF;
+END
+$$ LANGUAGE plpgsql;
 
 -- sql syntax
-do $$
-declare
-  total_payment numeric;
-  service_level varchar(25);
-begin
-  select sum(amount) into total_payment from Payment where customer_id = 100;
+DO $$
+DECLARE
+  total_payment NUMERIC;
+  service_level VARCHAR(25);
+BEGIN
+  SELECT SUM(amount) INTO total_payment FROM Payment WHERE customer_id = 100;
 
-  if found then
-    case
-      when total_payment > 200 then service_level = 'Platinum';
-      when total_payment > 100 then service_level = 'Gold';
-      else service_level = 'Sirlver';
-    end case;
-    raise notice 'Service Level: %', service_level;
-  else
-    raise notice 'Customer not found';
-  end if;
-end
-$$ language plpgsql;
+  IF found THEN
+    CASE
+      WHEN total_payment > 200 THEN service_level = 'Platinum';
+      WHEN total_payment > 100 THEN service_level = 'Gold';
+      ELSE service_level = 'Sirlver';
+    END CASE;
+    RAISE NOTICE 'Service Level: %', service_level;
+  ELSE
+    RAISE NOTICE 'Customer not found';
+  END IF;
+END
+$$ LANGUAGE plpgsql;
