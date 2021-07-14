@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS employee_man;
 CREATE TABLE employee_man(
   employee_id serial PRIMARY KEY,
-  full_name VARCHAR(255) NOT NULL,
+  full_name VARCHAR NOT NULL,
   manager_id INTEGER
 );
 
