@@ -17,7 +17,7 @@ services:
     volumes:
       - postgres12:/var/lib/postgresql/data
       - ./postgres12/:/vol:rw
-      - ./postgres12/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+      - ./postgres12/postgresql.conf:/var/lib/postgresql/data/postgresql.conf:rw
 
 volumes:
   postgres12:
