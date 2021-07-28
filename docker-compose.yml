@@ -19,5 +19,14 @@ services:
       - ./postgres12/:/vol:rw
       - ./postgres12/postgresql.conf:/var/lib/postgresql/data/postgresql.conf:rw
 
+  python3_9_6:
+    container_name: python3_9_6
+    hostname: python3_9_6
+    image: python:3.9.6-alpine3.14
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./python3_9_6/:/vol:rw
+
 volumes:
   postgres12:
