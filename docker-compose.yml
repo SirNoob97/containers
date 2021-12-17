@@ -37,6 +37,17 @@ services:
       - "127.0.0.1:9090:9090"
 #   volumes:
 #     - prometheus2.32.0:/opt/bitnami/prometheus/data
+
+  grafana8.3.3:
+    container_name: grafana8.3.3
+    hostname: grafana8.3.3
+    image: grafana/grafana-oss:8.3.3
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - grafana8.3.3:/var/lib/grafana:rw
+
 volumes:
   postgres12:
   prometheus2.32.0:
+  grafana8.3.3:
