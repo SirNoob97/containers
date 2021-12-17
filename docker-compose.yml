@@ -15,7 +15,7 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
-      - postgres12:/var/lib/postgresql/data
+      - postgres12:/var/lib/postgresql/data:rw
       - ./postgres12/:/vol:rw
       - ./postgres12/postgresql.conf:/var/lib/postgresql/data/postgresql.conf:rw
 
