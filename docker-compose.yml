@@ -41,6 +41,16 @@ services:
     command:
       - "--config.file=/config/prometheus.yaml"
 
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    volumes:
+      - '/:/host:ro,rslave'
+
   grafana8_3_3:
     container_name: grafana8_3_3
     hostname: grafana8_3_3
