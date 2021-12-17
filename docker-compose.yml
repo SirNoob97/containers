@@ -28,5 +28,15 @@ services:
     volumes:
       - ./python3_9_6/:/vol:rw
 
+
+  prometheus2.32.0:
+    container_name: prometheus2.32.0
+    hostname: prometheus2.32.0
+    image: prom/prometheus:v2.32.0
+    ports:
+      - "127.0.0.1:9090:9090"
+#   volumes:
+#     - prometheus2.32.0:/opt/bitnami/prometheus/data
 volumes:
   postgres12:
+  prometheus2.32.0:
