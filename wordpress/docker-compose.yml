@@ -1,0 +1,36 @@
+services:
+  wordpress:
+    container_name: wordpress
+    hostname: wordpress
+    image: wordpress
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    network:
+      - mysql_wordpress
+    volumes:
+      - ./www:/var/www/html
+
+  db:
+    container_name: mysql
+    hostname: mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    network:
+      - mysql_wordpress
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  mysql_wordpress:
+
+networks:
+  mysql_wordpress:
