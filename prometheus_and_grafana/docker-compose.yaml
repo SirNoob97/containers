@@ -1,0 +1,35 @@
+services:
+  prometheus2_32_0:
+    container_name: prometheus2_32_0
+    hostname: prometheus2_32_0
+    image: prom/prometheus:v2.32.0
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - prometheus2_32_0:/prometheus
+      - ./prometheus:/config:rw
+    command:
+      - "--config.file=/config/prometheus.yaml"
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    volumes:
+      - '/:/host:ro,rslave'
+
+  grafana8_3_3:
+    container_name: grafana8_3_3
+    hostname: grafana8_3_3
+    image: grafana/grafana-oss:8.3.3
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - grafana8_3_3:/var/lib/grafana:rw
+
+volumes:
+  prometheus2_32_0:
+  grafana8_3_3:
