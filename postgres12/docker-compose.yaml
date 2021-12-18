@@ -1,0 +1,16 @@
+services:
+  postgres12:
+    container_name: postgres12
+    hostname: postgres12
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres12:/var/lib/postgresql/data:rw
+      - ./files/:/vol:rw
+      - ./files/postgresql.conf:/var/lib/postgresql/data/postgresql.conf:rw
+
+volumes:
+  postgres12:
