@@ -6,10 +6,10 @@ services:
     ports:
       - "127.0.0.1:8080:80"
     environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: exampleuser
-      WORDPRESS_DB_PASSWORD: examplepass
-      WORDPRESS_DB_NAME: exampledb
+      WORDPRESS_DB_HOST: mysql8_0_26
+      WORDPRESS_DB_USER: wordpressuser
+      WORDPRESS_DB_PASSWORD: wordpressPass123
+      WORDPRESS_DB_NAME: wordpressdb
     network:
       - mysql8_0_26_wordpress5_8_2
     volumes:
@@ -20,9 +20,9 @@ services:
     hostname: mysql8_0_26
     image: mysql:8.0.26
     environment:
-      MYSQL_DATABASE: exampledb
-      MYSQL_USER: exampleuser
-      MYSQL_PASSWORD: examplepass
+      MYSQL_DATABASE: wordpressdb
+      MYSQL_USER: wordpressuser
+      MYSQL_PASSWORD: wordpressPass123
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     network:
       - mysql8_0_26_wordpress5_8_2
