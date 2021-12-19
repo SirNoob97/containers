@@ -1,21 +1,5 @@
 services:
-  wordpress:
-    container_name: wordpress5_8_2
-    hostname: wordpress5_8_2
-    image: wordpress:5.8.2-php8.1-fpm-alpine
-    ports:
-      - "127.0.0.1:8080:80"
-    environment:
-      WORDPRESS_DB_HOST: mysql8_0_26
-      WORDPRESS_DB_USER: wordpressuser
-      WORDPRESS_DB_PASSWORD: wordpressPass123
-      WORDPRESS_DB_NAME: wordpressdb
-    network:
-      - mysql8_0_26_wordpress5_8_2
-    volumes:
-      - ./www/:/var/www/html:rw
-
-  db:
+  mysql8_0_26:
     container_name: mysql8_0_26
     hostname: mysql8_0_26
     image: mysql:8.0.26
@@ -23,14 +7,34 @@ services:
       MYSQL_DATABASE: wordpressdb
       MYSQL_USER: wordpressuser
       MYSQL_PASSWORD: wordpressPass123
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-    network:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    networks:
       - mysql8_0_26_wordpress5_8_2
     volumes:
       - mysql8_0_26:/var/lib/mysql:rw
+      - ./mysql_files/my.cnf:/etc/mysql/my.cnf:ro
+
+  wordpress5_8_2:
+    container_name: wordpress5_8_2
+    hostname: wordpress5_8_2
+    image: wordpress:5.8.2-php8.1-apache
+    ports:
+      - '127.0.0.1:8080:80'
+    environment:
+      WORDPRESS_DB_HOST: 'mysql8_0_26:3306'
+      WORDPRESS_DB_USER: wordpressuser
+      WORDPRESS_DB_PASSWORD: wordpressPass123
+      WORDPRESS_DB_NAME: wordpressdb
+    networks:
+      - mysql8_0_26_wordpress5_8_2
+    volumes:
+      - ./www/:/var/www/html:rw
+    depends_on:
+      - mysql8_0_26
 
 volumes:
   mysql8_0_26:
 
 networks:
   mysql8_0_26_wordpress5_8_2:
+    driver: bridge
